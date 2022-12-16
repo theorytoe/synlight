@@ -1,0 +1,15 @@
+whitespace [ \t\r\n]+
+number (0[xX][0-9a-fA-F]+|[0-9]+)
+number '(\\.|[^'])'
+keyword (package|if|else|nil|func|var|for|continue|break|switch|case|default|return|type)\b
+builtin (import|defer|len|append|range|make|true|false)\b
+type (struct|interface|string|map|int|byte|bool|chan|int32)\b
+string `[^`]*`
+string "(\\"|[^"])*"
+word [a-zA-Z_][a-zA-Z0-9_]*
+comment //[^\n]*
+comment /\*(?s:.*?)\*/
+operator [-+/*=:<>,\.!]+
+nop (\[]|{})
+pair [([{]
+unpair [)\]}]

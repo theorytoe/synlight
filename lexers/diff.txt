@@ -1,0 +1,6 @@
+keyword diff[^\n]*
+builtin @@[^\n]*
+delline -[^\n]*
+addline \+[^\n]*
+text [^\n]+
+newline \n
