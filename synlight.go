@@ -224,3 +224,63 @@ func (hl *Lighter) HighlightString(data string, filename string) string {
 	hl.Highlight([]byte(data), filename, &buf)
 	return buf.String()
 }
+
+// Hihglight code based on provided extension
+func (hl *Lighter) HighlightExt(data []byte, extension string, w io.Writer) {
+	ext := extension
+
+	alt, ok := hl.aliases[ext]
+	if ok {
+		ext = alt
+	}
+
+	markers := hl.markers
+
+	tokens := hl.lexers[ext]
+	if tokens == nil {
+		hl.write(w, data)
+		return
+	}
+
+	dataloc := 0
+	state := 0
+	pairidx := uint(0)
+	for dataloc < len(data) {
+	restart:
+		for _, tok := range tokens {
+			if tok.state != state {
+				continue
+			}
+			m := tok.re.Find(data[dataloc:])
+			if m != nil {
+				state = tok.nextstate
+				name := tok.name
+				if name == "pair" {
+					name = pairnames[pairidx%uint(len(pairnames))]
+					pairidx += 1
+				} else if name == "unpair" {
+					pairidx -= 1
+					name = pairnames[pairidx%uint(len(pairnames))]
+				}
+				mk := markers[name]
+				if mk != nil {
+					w.Write(mk.before)
+				}
+				hl.write(w, m)
+				if mk != nil {
+					w.Write(mk.after)
+				}
+				dataloc += len(m)
+				goto restart
+			}
+		}
+		state = 0
+	}
+}
+
+// Hihglight code based on provided extension, returning a string
+func (hl *Lighter) HighlightExtString(data string, extenstion string) string {
+	var buf bytes.Buffer
+	hl.HighlightExt([]byte(data), extenstion, &buf)
+	return buf.String()
+}
