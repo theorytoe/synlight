@@ -148,6 +148,8 @@ func New(options Options) *Lighter {
 	// c++
 	hl.AddLexer("cpp", strings.NewReader(lexer_cpp))
 	hl.aliases["hpp"] = "cpp"
+	hl.aliases["cc"] = "cpp"
+	hl.aliases["hh"] = "cpp"
 
 	// go
 	hl.AddLexer("go", strings.NewReader(lexer_go))
