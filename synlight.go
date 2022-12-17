@@ -147,6 +147,7 @@ func New(options Options) *Lighter {
 	hl.AddLexer("py", strings.NewReader(lexer_py))
 	hl.AddLexer("rs", strings.NewReader(lexer_rs))
 	hl.AddLexer("sql", strings.NewReader(lexer_sql))
+	hl.AddLexer("hc", strings.NewReader(lexer_hc))
 
 	hl.aliases = make(map[string]string)
 	hl.aliases["h"] = "c"
@@ -154,6 +155,9 @@ func New(options Options) *Lighter {
 	hl.aliases["python"] = "py"
 	hl.aliases["rust"] = "rs"
 	hl.aliases["xml"] = "html"
+	hl.aliases["HC"] = "hc"
+	hl.aliases["hh"] = "hc"
+	hl.aliases["HH"] = "hc"
 
 	return hl
 }

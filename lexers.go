@@ -41,6 +41,22 @@ var lexer_go = "" +
 	"pair [([{]\n" +
 	"unpair [)\\]}]\n" +
 	""
+var lexer_hc = "" +
+	"whitespace [ \\t\\r\\n]+\n" +
+	"number (0[xX][0-9a-fA-F]+|[0-9]+)\n" +
+	"number '(\\\\.|[^'])'\n" +
+	"keyword (if|else|for|while|continue|break|switch|case|default|return|typedef|extern)\\b\n" +
+	"builtin (NULL|va_list|true|false)\\b\n" +
+	"builtin #(\\\\\\n|[^\\n])*\n" +
+	"type (static|struct|const|unsigned|char|int|long|byte|bool|void|U0|I8|U8|I16|U16|I32|U32|I64|U64|F64)\\b\n" +
+	"string \"(\\\\\"|[^\"])*\"\n" +
+	"word [a-zA-Z_][a-zA-Z0-9_]*\n" +
+	"comment //[^\\n]*\n" +
+	"comment /\\*(?s:.*?)\\*/\n" +
+	"operator [-+/*=:<>,\\.!]+\n" +
+	"pair [([{]\n" +
+	"unpair [)\\]}]\n" +
+	""
 var lexer_html = "" +
 	"builtin:0:1 <[/a-zA-Z]*\n" +
 	"keyword:1:1 [^=/>\"]+\n" +
