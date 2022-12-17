@@ -137,27 +137,47 @@ func New(options Options) *Lighter {
 		panic("invalid output format")
 	}
 
+	// setup hl
 	hl.lexers = make(map[string][]*token)
-	hl.AddLexer("c", strings.NewReader(lexer_c))
-	hl.AddLexer("diff", strings.NewReader(lexer_diff))
-	hl.AddLexer("go", strings.NewReader(lexer_go))
-	hl.AddLexer("html", strings.NewReader(lexer_html))
-	hl.AddLexer("js", strings.NewReader(lexer_js))
-	hl.AddLexer("lua", strings.NewReader(lexer_lua))
-	hl.AddLexer("py", strings.NewReader(lexer_py))
-	hl.AddLexer("rs", strings.NewReader(lexer_rs))
-	hl.AddLexer("sql", strings.NewReader(lexer_sql))
-	hl.AddLexer("hc", strings.NewReader(lexer_hc))
-
 	hl.aliases = make(map[string]string)
+
+	// c
+	hl.AddLexer("c", strings.NewReader(lexer_c))
 	hl.aliases["h"] = "c"
-	hl.aliases["patch"] = "diff"
+
+	// go
+	hl.AddLexer("go", strings.NewReader(lexer_go))
+
+	// python
+	hl.AddLexer("py", strings.NewReader(lexer_py))
 	hl.aliases["python"] = "py"
+
+	// rust
+	hl.AddLexer("rs", strings.NewReader(lexer_rs))
 	hl.aliases["rust"] = "rs"
+
+	// html+xml
+	hl.AddLexer("html", strings.NewReader(lexer_html))
 	hl.aliases["xml"] = "html"
+
+	// js
+	hl.AddLexer("js", strings.NewReader(lexer_js))
+
+	// lua
+	hl.AddLexer("lua", strings.NewReader(lexer_lua))
+
+	// holyc
+	hl.AddLexer("hc", strings.NewReader(lexer_hc))
 	hl.aliases["HC"] = "hc"
 	hl.aliases["hh"] = "hc"
 	hl.aliases["HH"] = "hc"
+
+	// diff+pach
+	hl.AddLexer("diff", strings.NewReader(lexer_diff))
+	hl.aliases["patch"] = "diff"
+
+	// sql
+	hl.AddLexer("sql", strings.NewReader(lexer_sql))
 
 	return hl
 }
