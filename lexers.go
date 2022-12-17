@@ -1,5 +1,30 @@
 package synlight
 
+var lexer_cpp = "" +
+	"whitespace [ \\t\\r\\n]+\n" +
+	"number (0[xX][0-9a-fA-F]+|[0-9]+)\n" +
+	"number '(\\\\.|[^'])'\n" +
+	"keyword (if|else|for|while|continue|break|switch|case|default|return|typedef|extern)\\b\n" +
+	"keyword (new|delete|this|friend|using|public|protected|private|inline|virtual|explicit|export)\\b\n" +
+	"keyword (throw|tryu|catch)\\b\n" +
+	"keyword (operator|typeid|mutable)\\b\n" +
+	"keyword (class|typename|template|namespace)\\b\n" +
+	"keyword (constexpor|decltype|thread_local)\\b\n" +
+	"builtin (NULL|va_list|true|false)\\b\n" +
+	"builtin #(\\\\\\n|[^\\n])*\n" +
+	"type (static|struct|const|unsigned|char|int|long|byte|bool|void|int8_t|uint8_t|int32_t|uint32_t)\\b\n" +
+	"type (bool|char_t)\\b\n" +
+	"type (__cplusplus)\n" +
+	"type (nullptr|nullptr_t|auto)\\b\n" +
+	"string \"(\\\\\"|[^\"])*\"\n" +
+	"word [a-zA-Z_][a-zA-Z0-9_]*\n" +
+	"comment //[^\\n]*\n" +
+	"comment /\\*(?s:.*?)\\*/\n" +
+	"operator [-+/*=:<>,\\.!]+\n" +
+	"operator (and|bitor|or|xor|compl|bitand|and_eq|or_eq|xor_eq|not|not_eq)\\b\n" +
+	"pair [([{]\n" +
+	"unpair [)\\]}]\n" +
+	""
 var lexer_c = "" +
 	"whitespace [ \\t\\r\\n]+\n" +
 	"number (0[xX][0-9a-fA-F]+|[0-9]+)\n" +

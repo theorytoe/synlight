@@ -7,6 +7,7 @@ imporvements.
 supported langs:
 
 - c
+- cpp (c++11 extensions as well)
 - holyc
 - python
 - go
