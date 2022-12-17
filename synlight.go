@@ -3,8 +3,7 @@
 // Copyright (c) 2022 theorytoe <evan@theoryware.net>
 //
 // Permission to use, copy, modify, and distribute this software for any
-// purpose with or without fee is hereby granted, provided that the above
-// copyright notice and this permission notice appear in all copies.
+// purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 //
 // THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 // WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
@@ -162,9 +161,10 @@ func New(options Options) *Lighter {
 	hl.AddLexer("rs", strings.NewReader(lexer_rs))
 	hl.aliases["rust"] = "rs"
 
-	// html+xml
+	// html+xml+svg
 	hl.AddLexer("html", strings.NewReader(lexer_html))
 	hl.aliases["xml"] = "html"
+	hl.aliases["svg"] = "html"
 
 	// js
 	hl.AddLexer("js", strings.NewReader(lexer_js))
