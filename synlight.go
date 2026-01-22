@@ -1,9 +1,10 @@
 //
 // Copyright (c) 2018,2019 Ted Unangst <tedu@tedunangst.com>
-// Copyright (c) 2022 theorytoe <evan@theoryware.net>
+// Copyright (c) 2024 theorytoe <theorytoe@cock.li>
 //
 // Permission to use, copy, modify, and distribute this software for any
-// purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+// purpose with or without fee is hereby granted, provided that the above
+// copyright notice and this permission notice appear in all copies.
 //
 // THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 // WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
@@ -25,42 +26,63 @@ import (
 	"strings"
 )
 
-type token struct {
-	name      string
-	re        *regexp.Regexp
-	state     int
-	nextstate int
-}
-
-// A syntax highlighter
-type Lighter struct {
-	markers map[string]*marker
-	aliases map[string]string
-	lexers  map[string][]*token
-	write   func(io.Writer, []byte)
-}
-
-type marker struct {
-	before []byte
-	after  []byte
-}
-
-// Options for creating a new highlighter.
-// HTML or TTY output are supported.
-type Options struct {
-	Format OutputFormat
-}
-
-type OutputFormat int
-
 const (
 	None OutputFormat = iota
 	HTML
 	TTY
+
+	TTYFgBlack   = "\x1b[30m"
+	TTYFgRed     = "\x1b[31m"
+	TTYFgGreen   = "\x1b[32m"
+	TTYFgYellow  = "\x1b[33m"
+	TTYFgBlue    = "\x1b[34m"
+	TTYFgMagenta = "\x1b[35m"
+	TTYFgCyan    = "\x1b[36m"
+	TTYFgWhite   = "\x1b[37m"
+	TTYBgBlack   = "\x1b[40m"
+	TTYBgRed     = "\x1b[41m"
+	TTYBgGreen   = "\x1b[42m"
+	TTYBgYellow  = "\x1b[43m"
+	TTYBgBlue    = "\x1b[44m"
+	TTYBgMagenta = "\x1b[45m"
+	TTYBgCyan    = "\x1b[46m"
+	TTYBgWhite   = "\x1b[47m"
 )
 
-var htmlmarkers = make(map[string]*marker)
-var ttymarkers = make(map[string]*marker)
+var (
+	htmlmarkers = make(map[string]*marker)
+	ttymarkers  = make(map[string]*marker)
+)
+
+type (
+	token struct {
+		name      string
+		re        *regexp.Regexp
+		state     int
+		nextstate int
+	}
+
+	// Contains all the highliging primitives
+	Lighter struct {
+		markers map[string]*marker
+		aliases map[string]string
+		lexers  map[string][]*token
+		write   func(io.Writer, []byte)
+	}
+
+	marker struct {
+		before []byte
+		after  []byte
+	}
+
+	// Options for creating a new highlighter.
+	// HTML or TTY output are supported.
+	Options struct {
+		Format OutputFormat
+	}
+
+	OutputFormat int
+)
 
 func init() {
 	htmlmarkers["keyword"] = newmarker("<span class=kw>", "</span>")

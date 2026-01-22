@@ -54,8 +54,8 @@ var lexer_go = "" +
 	"number (0[xX][0-9a-fA-F]+|[0-9]+)\n" +
 	"number '(\\\\.|[^'])'\n" +
 	"keyword (package|if|else|nil|func|var|for|continue|break|switch|case|default|return|type)\\b\n" +
-	"builtin (import|defer|len|append|range|make|true|false)\\b\n" +
-	"type (struct|interface|string|map|int|byte|bool|chan|int32)\\b\n" +
+	"builtin (append|cap|clear|close|complex|copy|delete|imag|len|make|max|min|new|panic|print|println|real|recover)\\b\n" +
+	"type (struct|interface|mapany|bool|byte|comparable|complex128|complex64|error|float32|float64|int|int16|int32|int64|int8|rune|string|uint|uint16|uint32|uint64|uint8|uintptr)\\b\n" +
 	"string `[^`]*`\n" +
 	"string \"(\\\\\"|[^\"])*\"\n" +
 	"word [a-zA-Z_][a-zA-Z0-9_]*\n" +
