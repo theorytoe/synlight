@@ -1,0 +1,18 @@
+whitespace [ \t]+
+newline \n
+comment <!--(?s:.*?)-->
+keyword ^#{1,6}[^\n]*
+keyword ^>[^\n]*
+keyword ^\*\*\*[^\n]*
+keyword ^---[^\n]*
+keyword ^___[^\n]*
+number ^[ \t]*\[[ xX]\]
+string `[^`]*`
+string "(\\"|[^"])*"
+builtin !?\[[^\]]*\]\([^)]*\)
+builtin \*\*[^\n]*?\*\*
+builtin __[^_\n]*?__
+builtin ~~[^\n]*?~~
+builtin \*[^\n]*?\*
+builtin _[^_\n]*?_
+builtin ^[ \t]*([-*+]|[0-9]+\.)[ \t]

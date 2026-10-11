@@ -1,0 +1,14 @@
+whitespace [ \t\r\n]+
+number (0[xX][0-9a-fA-F]+|[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+)?)
+keyword (associatedtype|class|deinit|enum|extension|fileprivate|func|import|init|inout|internal|let|open|operator|private|precedencegroup|protocol|public|rethrows|static|struct|subscript|typealias|var|break|case|catch|continue|default|defer|do|else|fallthrough|for|guard|if|in|repeat|return|throw|switch|where|while|as|any|await|false|is|nil|self|Self|super|throws|true|try|async|actor|some|convenience|dynamic|final|indirect|infix|lazy|mutating|nonmutating|optional|override|postfix|prefix|required|unowned|weak|willSet|didSet)\b
+type (Any|AnyObject|Array|Bool|Character|Dictionary|Double|Float|Int|Int8|Int16|Int32|Int64|Optional|Never|Set|String|UInt|UInt8|UInt16|UInt32|UInt64|Void)\b
+builtin @[a-zA-Z_][a-zA-Z0-9_]*
+builtin ^#[a-zA-Z]+
+string """(?s:.*?)"""
+string "(\\"|[^"])*"
+word [a-zA-Z_][a-zA-Z0-9_]*
+comment //[^\n]*
+comment /\*(?s:.*?)\*/
+operator [-+/*=:<>,\.!&|^~?%]+
+pair [([{]
+unpair [)\]}]

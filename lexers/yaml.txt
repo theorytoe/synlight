@@ -1,0 +1,9 @@
+whitespace [ \t\r\n]+
+comment #[^\n]*
+string "(\\"|[^"])*"
+string '((''|[^'])*)'
+number -?(0[xX][0-9a-fA-F]+|[0-9]+(\.[0-9]+)?)
+keyword (true|True|false|False|yes|Yes|no|No|on|On|off|Off|null|Null|NULL)\b
+keyword ^[ \t]*-[ \t]
+keyword [^ \t\n#:]+:
+operator [|>&*!%@`\[\]{},]

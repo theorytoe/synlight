@@ -1,18 +1,17 @@
 whitespace [ \t\r\n]+
-number (0[xX][0-9a-fA-F]+|[0-9]+)
+number (0[xX][0-9a-fA-F]+|[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+)?)
 number '(\\.|[^'])'
-keyword (extern|if|else|fn|pub|let|for|loop|continue|break|match|return|type|struct|impl)\b
-builtin (Err|Ok|Result|Some|None|dyn|unsafe|len|new|true|false|unwrap|as_bytes|to_string|as_str)\b
-builtin (println!|format!)
-type (&?mut|const|&?String|i32|u32|i8|u8|i64|byte|bool|chan|usize)\b
-type (\w+::)
-string ^#[^\n]*
-builtin ^use [^\n]*
+builtin ^#!?\[[^\]]*\]
+keyword (as|async|await|break|const|continue|crate|dyn|else|enum|extern|fn|for|if|impl|in|let|loop|match|mod|move|mut|pub|ref|return|self|Self|static|struct|super|trait|type|unsafe|use|where|while|union|macro_rules)\b
+builtin (Err|Ok|Result|Some|None|Box|Rc|Arc|Vec|String|Option|HashMap|HashSet|Iterator|Clone|Copy|Debug|Default|Display|Eq|PartialEq|Ord|PartialOrd|Hash|Send|Sync|Drop|Fn|FnMut|FnOnce)\b
+type (bool|char|f32|f64|i8|i16|i32|i64|i128|isize|u8|u16|u32|u64|u128|usize|str)\b
+builtin [a-zA-Z_][a-zA-Z0-9_]*!
+string b?"(\\"|[^"])*
+string b?'(\\.|[^'])*'
 string `[^`]*`
-string "(\\"|[^"])*"
 word [a-zA-Z_][a-zA-Z0-9_]*
 comment //[^\n]*
 comment /\*(?s:.*?)\*/
-operator [-+/*=:<>,\.!]+
+operator [-+/*=:<>,\.!&|^~?]+
 pair [([{]
 unpair [)\]}]

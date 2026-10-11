@@ -1,0 +1,12 @@
+whitespace [ \t\r\n]+
+comment #[^\n]*
+string "(\\"|[^"])*"
+string '(\\'|[^'])*'
+string `[^`]*`
+keyword (if|then|else|elif|fi|for|while|until|do|done|case|esac|in|function|select|time|return|local|export|readonly|declare|typeset|shift|break|continue|exit|trap|set|unset|exec|eval|source|alias|unalias|let|test|read|cd|pwd|echo|printf|true|false)\b
+builtin \$[({]?[a-zA-Z_][a-zA-Z0-9_]*[)}]?
+builtin [0-9]?>&?[0-9]*
+word [a-zA-Z_][a-zA-Z0-9_-]*
+operator [-+/*=:<>,\\.!&|^~?%]+
+pair [([{]
+unpair [)\]}]

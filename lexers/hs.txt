@@ -1,0 +1,12 @@
+whitespace [ \t\r\n]+
+number (0[xX][0-9a-fA-F]+|[0-9]+(\.[0-9]+)?)
+keyword (case|class|data|default|deriving|do|else|foreign|if|import|in|infix|infixl|infixr|instance|let|module|newtype|of|then|type|where|qualified|as|hiding|forall|mdo|proc|rec)\b
+builtin (map|filter|foldl|foldr|foldl1|foldr1|head|tail|init|last|length|reverse|concat|concatMap|zip|zipWith|unzip|take|drop|takeWhile|dropWhile|span|break|elem|notElem|lookup|sum|product|maximum|minimum|replicate|show|read|print|putStrLn|putStr|getLine|return|pure|fmap|mapM|mapM_|sequence|id|const|flip|curry|uncurry|error|undefined|otherwise|True|False|Just|Nothing)\b
+type (Int|Integer|Float|Double|Char|String|Bool|Maybe|Either|Ordering|IO|Show|Read|Eq|Ord|Num|Enum|Bounded|Functor|Applicative|Monad|Foldable|Traversable|Semigroup|Monoid)\b
+string "(\\"|[^"])*"
+word [a-zA-Z_][a-zA-Z0-9_']*
+comment --[^\n]*
+comment \{-(?s:.*?)-\}
+operator [-+/*=:<>,\.!&|^~?%$]+
+pair [([{]
+unpair [)\]}]

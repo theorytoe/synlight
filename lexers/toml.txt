@@ -1,0 +1,11 @@
+whitespace [ \t\r\n]+
+comment #[^\n]*
+keyword ^\[\[?[^\]]*\]\]?
+keyword (true|false)\b
+number -?(0[xX][0-9a-fA-F]+|[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+)?)
+string """(?s:.*?)"""
+string '''(?s:.*?)'''
+string "(\\"|[^"])*"
+string '((''|[^'])*)'
+keyword [a-zA-Z_][a-zA-Z0-9_.-]*[ \t]*=
+operator [\[\]{},.=]

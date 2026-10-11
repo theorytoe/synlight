@@ -1,0 +1,14 @@
+whitespace [ \t\r\n]+
+number (0[xX][0-9a-fA-F]+|[0-9]+(\.[0-9]+)?[fFdDlL]?)
+number '(\\.|[^'])*'
+keyword (abstract|assert|break|case|catch|class|const|continue|default|do|else|enum|extends|final|finally|for|goto|if|implements|import|instanceof|interface|native|new|package|permits|private|protected|public|record|return|sealed|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|var|volatile|while|yield)\b
+builtin (true|false|null)\b
+type (boolean|byte|char|double|float|int|long|short|void|String|Object|Integer|Long|Double|Float|Boolean|Character|Byte|Short|List|Map|Set|ArrayList|HashMap|HashSet|Optional|Stream|Exception|RuntimeException|Override)\b
+string "(\\"|[^"])*"
+string '(\\.|[^'])*'
+word [a-zA-Z_$][a-zA-Z0-9_$]*
+comment //[^\n]*
+comment /\*(?s:.*?)\*/
+operator [-+/*=:<>,\.!&|^~?%]+
+pair [([{]
+unpair [)\]}]

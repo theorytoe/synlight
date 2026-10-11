@@ -21,6 +21,7 @@ import (
 	"bytes"
 	"html/template"
 	"io"
+	"path"
 	"regexp"
 	"strconv"
 	"strings"
@@ -168,9 +169,13 @@ func New(options Options) *Lighter {
 
 	// c++
 	hl.AddLexer("cpp", strings.NewReader(lexer_cpp))
+	hl.aliases["cpp"] = "cpp"
 	hl.aliases["hpp"] = "cpp"
+	hl.aliases["hxx"] = "cpp"
 	hl.aliases["cc"] = "cpp"
+	hl.aliases["cxx"] = "cpp"
 	hl.aliases["hh"] = "cpp"
+	hl.aliases["c++"] = "cpp"
 
 	// go
 	hl.AddLexer("go", strings.NewReader(lexer_go))
@@ -178,6 +183,8 @@ func New(options Options) *Lighter {
 	// python
 	hl.AddLexer("py", strings.NewReader(lexer_py))
 	hl.aliases["python"] = "py"
+	hl.aliases["pyw"] = "py"
+	hl.aliases["pyi"] = "py"
 
 	// rust
 	hl.AddLexer("rs", strings.NewReader(lexer_rs))
@@ -185,37 +192,153 @@ func New(options Options) *Lighter {
 
 	// html+xml+svg
 	hl.AddLexer("html", strings.NewReader(lexer_html))
+	hl.aliases["htm"] = "html"
+	hl.aliases["xhtml"] = "html"
 	hl.aliases["xml"] = "html"
 	hl.aliases["svg"] = "html"
 
-	// js
+	// javascript
 	hl.AddLexer("js", strings.NewReader(lexer_js))
+	hl.aliases["javascript"] = "js"
+	hl.aliases["jsx"] = "js"
+	hl.aliases["mjs"] = "js"
+	hl.aliases["cjs"] = "js"
+
+	// typescript
+	hl.AddLexer("ts", strings.NewReader(lexer_ts))
+	hl.aliases["typescript"] = "ts"
+	hl.aliases["tsx"] = "ts"
+	hl.aliases["mts"] = "ts"
+	hl.aliases["cts"] = "ts"
 
 	// lua
 	hl.AddLexer("lua", strings.NewReader(lexer_lua))
 
 	// holyc
 	hl.AddLexer("hc", strings.NewReader(lexer_hc))
-	hl.aliases["HC"] = "hc"
-	hl.aliases["hh"] = "hc"
-	hl.aliases["HH"] = "hc"
+	hl.aliases["holyc"] = "hc"
 
-	// diff+pach
+	// diff+patch
 	hl.AddLexer("diff", strings.NewReader(lexer_diff))
 	hl.aliases["patch"] = "diff"
 
 	// sql
 	hl.AddLexer("sql", strings.NewReader(lexer_sql))
 
+	// json
+	hl.AddLexer("json", strings.NewReader(lexer_json))
+	hl.aliases["jsonc"] = "json"
+
+	// yaml
+	hl.AddLexer("yaml", strings.NewReader(lexer_yaml))
+	hl.aliases["yml"] = "yaml"
+
+	// toml
+	hl.AddLexer("toml", strings.NewReader(lexer_toml))
+
+	// ini and friends
+	hl.AddLexer("ini", strings.NewReader(lexer_ini))
+	hl.aliases["conf"] = "ini"
+	hl.aliases["cfg"] = "ini"
+	hl.aliases["desktop"] = "ini"
+	hl.aliases["service"] = "ini"
+	hl.aliases["env"] = "ini"
+
+	// markdown
+	hl.AddLexer("markdown", strings.NewReader(lexer_markdown))
+	hl.aliases["md"] = "markdown"
+	hl.aliases["mkd"] = "markdown"
+
+	// shell
+	hl.AddLexer("shell", strings.NewReader(lexer_shell))
+	hl.aliases["sh"] = "shell"
+	hl.aliases["bash"] = "shell"
+	hl.aliases["zsh"] = "shell"
+	hl.aliases["ksh"] = "shell"
+
+	// css
+	hl.AddLexer("css", strings.NewReader(lexer_css))
+
+	// make
+	hl.AddLexer("make", strings.NewReader(lexer_make))
+	hl.aliases["mk"] = "make"
+	hl.aliases["mak"] = "make"
+	hl.aliases["makefile"] = "make"
+
+	// dockerfile
+	hl.AddLexer("dockerfile", strings.NewReader(lexer_dockerfile))
+	hl.aliases["docker"] = "dockerfile"
+
+	// java
+	hl.AddLexer("java", strings.NewReader(lexer_java))
+
+	// c#
+	hl.AddLexer("cs", strings.NewReader(lexer_cs))
+	hl.aliases["csharp"] = "cs"
+
+	// ruby
+	hl.AddLexer("rb", strings.NewReader(lexer_rb))
+	hl.aliases["ruby"] = "rb"
+	hl.aliases["gemspec"] = "rb"
+	hl.aliases["rake"] = "rb"
+
+	// php
+	hl.AddLexer("php", strings.NewReader(lexer_php))
+	hl.aliases["phtml"] = "php"
+
+	// kotlin
+	hl.AddLexer("kt", strings.NewReader(lexer_kt))
+	hl.aliases["kts"] = "kt"
+	hl.aliases["kotlin"] = "kt"
+
+	// swift
+	hl.AddLexer("swift", strings.NewReader(lexer_swift))
+
+	// zig
+	hl.AddLexer("zig", strings.NewReader(lexer_zig))
+
+	// perl
+	hl.AddLexer("pl", strings.NewReader(lexer_pl))
+	hl.aliases["pm"] = "pl"
+	hl.aliases["perl"] = "pl"
+
+	// haskell
+	hl.AddLexer("hs", strings.NewReader(lexer_hs))
+	hl.aliases["haskell"] = "hs"
+	hl.aliases["lhs"] = "hs"
+
+	// elixir
+	hl.AddLexer("ex", strings.NewReader(lexer_ex))
+	hl.aliases["exs"] = "ex"
+	hl.aliases["elixir"] = "ex"
+
+	// myrddin
+	hl.AddLexer("myr", strings.NewReader(lexer_myr))
+	hl.aliases["myrddin"] = "myr"
+
 	return hl
 }
 
 var pairnames = []string{"string", "keyword", "comment", "builtin"}
 
+// normalizeExt lowercases an extension and drops a leading dot.
+func normalizeExt(ext string) string {
+	return strings.ToLower(strings.TrimPrefix(ext, "."))
+}
+
+// extOf picks the lexer extension for filename. Files without an extension,
+// such as Makefile or Dockerfile, fall back to the bare base name.
+func extOf(filename string) string {
+	ext := path.Ext(filename)
+	if ext == "" {
+		return strings.ToLower(path.Base(filename))
+	}
+	return normalizeExt(ext)
+}
+
 // Highlight code, writing it to w.
 func (hl *Lighter) Highlight(data []byte, filename string, w io.Writer) {
-	dot := strings.LastIndex(filename, ".")
-	ext := filename[dot+1:]
+	ext := extOf(filename)
 
 	alt, ok := hl.aliases[ext]
 	if ok {
@@ -273,9 +396,9 @@ func (hl *Lighter) HighlightString(data string, filename string) string {
 	return buf.String()
 }
 
-// Hihglight code based on provided extension
+// Highlight code based on provided extension
 func (hl *Lighter) HighlightExt(data []byte, extension string, w io.Writer) {
-	ext := extension
+	ext := normalizeExt(extension)
 
 	alt, ok := hl.aliases[ext]
 	if ok {

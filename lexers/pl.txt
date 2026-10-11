@@ -1,0 +1,11 @@
+whitespace [ \t\r\n]+
+comment #[^\n]*
+number (0[xX][0-9a-fA-F]+|[0-9]+(\.[0-9]+)?)
+keyword (and|or|not|xor|cmp|eq|ne|lt|gt|le|ge|if|elsif|else|unless|while|until|for|foreach|continue|do|given|when|default|last|next|redo|return|sub|my|our|local|state|package|use|require|no|BEGIN|END|CHECK|INIT|UNITCHECK|DESTROY|eval|die|warn|print|printf|say|open|close|read|write|chomp|chop|split|join|push|pop|shift|unshift|splice|keys|values|each|exists|delete|defined|ref|bless|scalar|sort|reverse|map|grep|wantarray|caller|tie|tied|untie|lock|sleep|exit)\b
+builtin (\$[a-zA-Z_][a-zA-Z0-9_]*|@[a-zA-Z_][a-zA-Z0-9_]*|%[a-zA-Z_][a-zA-Z0-9_]*|&[a-zA-Z_][a-zA-Z0-9_]*)
+string "(\\"|[^"])*"
+string '(\\'|[^'])*'
+word [a-zA-Z_][a-zA-Z0-9_]*
+operator [-+/*=:<>,\.!&|^~?%]+
+pair [([{]
+unpair [)\]}]
