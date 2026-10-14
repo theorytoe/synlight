@@ -1,3 +1,3 @@
-module gitgud.io/theorytoe/synlight
+module github.com/theorytoe/synlight
 
 go 1.19
