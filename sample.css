@@ -1,8 +1,9 @@
-.highlight .keyword { color: #d699b6; }
-.highlight .builtin { color: #7fbbb3; }
-.highlight .string { color: #e67e80; }
-.highlight .number { color: #e67e80; }
-.highlight .type { color: #d699b6; }
-.highlight .comment { color: #4c555b; }
-.highlight .addline { color: #a7c080; }
-.highlight .delline { color: #e67e80; }
+.highlight .keyword  { color: #c678dd; }
+.highlight .builtin  { color: #56d4dd; }
+.highlight .string   { color: #98c379; }
+.highlight .number   { color: #d19a66; }
+.highlight .type     { color: #e5c07b; }
+.highlight .operator { color: #ff79c6; }
+.highlight .comment  { color: #8a9199; }
+.highlight .addline  { color: #a6e22e; }
+.highlight .delline  { color: #e06c75; }

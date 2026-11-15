@@ -8,6 +8,7 @@ supported langs:
 
 - c (.c, .h)
 - cpp (.cpp, .hpp, .hxx, .cc, .cxx, .hh, .c++)
+- ada (.adb, .ads)
 - holyc (.hc, .holyc)
 - go (.go)
 - python (.py, .pyw, .pyi)

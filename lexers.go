@@ -1,5 +1,24 @@
 package synlight
 
+var lexer_ada = "" +
+	"whitespace [ \\t\\r\\n]+\n" +
+	"comment --[^\\n]*\n" +
+	"number [0-9][0-9_]*#[0-9a-fA-F][0-9a-fA-F_]*(\\.[0-9a-fA-F][0-9a-fA-F_]*)?#([eE][-+]?[0-9][0-9_]*)?\n" +
+	"number [0-9][0-9_]*(\\.[0-9][0-9_]*)?([eE][-+]?[0-9][0-9_]*)?\n" +
+	"string \"(\"\"|[^\"])*\"\n" +
+	"string '.'\n" +
+	"builtin '[a-zA-Z][a-zA-Z0-9_]*\n" +
+	"keyword ((?i)abort|abstract|accept|access|aliased|all|array|at|begin|body|case|constant|declare|delay|delta|digits|do|else|elsif|end|entry|exception|exit|for|function|generic|goto|if|in|interface|is|limited|loop|new|null|of|others|out|overriding|package|pragma|private|procedure|protected|raise|range|record|renames|requeue|return|reverse|select|separate|some|subtype|synchronized|tagged|task|terminate|then|type|until|use|when|while|with)\\b\n" +
+	"type ((?i)integer|natural|positive|float|long_float|long_integer|short_integer|short_float|boolean|character|wide_character|wide_wide_character|string|wide_string|wide_wide_string|duration|long_duration|short_duration|root_integer)\\b\n" +
+	"builtin ((?i)true|false|ada|ascii|standard|interfaces|system|constraint_error|program_error|storage_error|tasking_error|numeric_error|name_error|status_error|use_error|mode_error|device_error|data_error|end_error|layout_error|assertion_error|capacity_error)\\b\n" +
+	"builtin ((?i)[a-z][a-z0-9_]*_(integer|float|string|character|boolean))\\b\n" +
+	"builtin ((?i)[a-z][a-z0-9_]*_[0-9]+)\\b\n" +
+	"operator ((?i)and|or|xor|not|mod|rem|abs)\\b\n" +
+	"word [a-zA-Z][a-zA-Z0-9_]*\n" +
+	"operator (\\*\\*|\\.\\.|=>|:=|<=|>=|/=|<>|[+*/=:<>,&|-])\n" +
+	"pair [([{]\n" +
+	"unpair [)\\]}]\n" +
+	""
 var lexer_cpp = "" +
 	"whitespace [ \\t\\r\\n]+\n" +
 	"number (0[xX][0-9a-fA-F]+|[0-9]+)\n" +

@@ -316,6 +316,10 @@ func New(options Options) *Lighter {
 	hl.AddLexer("myr", strings.NewReader(lexer_myr))
 	hl.aliases["myrddin"] = "myr"
 
+	// ada
+	hl.AddLexer("adb", strings.NewReader(lexer_ada))
+	hl.aliases["ads"] = "adb"
+
 	return hl
 }
 
